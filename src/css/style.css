@@ -1,0 +1,16 @@
+div.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+div.navbar li {
+    display: inline;
+    float: left;
+}
+
+div.navbar li a {
+    display: block;
+    padding: 8px;
+    background-color: #dddddd;
+}

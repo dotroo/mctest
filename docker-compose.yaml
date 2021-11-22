@@ -1,0 +1,63 @@
+version: '3.5'
+
+services:
+  # PHP fpm
+  manychat-backend:
+    image: manychat-backend:latest
+    restart: always
+    tty: true
+    working_dir: /var/www/manychat
+    #env_file:
+    # - .env
+    volumes:
+      - .:/var/www/manychat
+    networks:
+      - manychat-network
+    container_name: manychat-backend
+
+  # Nginx Service
+  manychat-nginx:
+    image: nginx:alpine
+    container_name: manychat-nginx
+    restart: always
+    tty: true
+    environment:
+      - "APPLICATION_UPSTREAM=manychat-backend:9000"
+    volumes:
+      - ./docker/nginx/sites-available/manychat/:/etc/nginx/sites-available/manychat/
+      - ./docker/nginx/templates/:/etc/nginx/templates/
+    networks:
+      - manychat-network
+    ports:
+      - "80:80"
+      - "443:443"
+
+  # MySQL Service
+  manychat-mysql:
+    image: library/mysql:8.0
+    container_name: manychat-mysql
+    restart: always
+    tty: true
+    ports:
+      - "3309:3306"
+    environment:
+      MYSQL_DATABASE: app_db
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 111111
+      MYSQL_ROOT_PASSWORD: admin
+      SERVICE_NAME: mysql
+    networks:
+      - manychat-network
+    volumes:
+      - applicationMysqlData:/var/lib/mysql
+      - applicationMysqlFiles:/var/lib/mysql-files
+#Docker Networks
+networks:
+  manychat-network:
+    driver: bridge
+#Docker Volumes
+volumes:
+  applicationMysqlData:
+    driver: local
+  applicationMysqlFiles:
+    driver: local

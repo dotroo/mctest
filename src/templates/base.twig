@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/src/css/style.css">
+    <title>ManyChat {% block title %}{% endblock %}</title>
+</head>
+<body>
+<div class="navbar">
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/departments">Departments</a></li>
+        <li><a href="/projects">Projects</a></li>
+        <li><a href="/employees">Employees</a></li>
+        <li><a href="/report">Report</a></li>
+    </ul>
+</div>
+<br>
+<div id="content">
+    {% block content %}{% endblock %}
+</div>
+</body>
+</html>

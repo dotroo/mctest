@@ -1,0 +1,23 @@
+{
+    "name": "nikita/manychat",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Nikita\\Manychat\\": "src/",
+            "MVC\\Controllers\\": "src/mvc/controllers/",
+            "MVC\\Core\\": "src/mvc/core/",
+            "MVC\\Models\\": "src/mvc/models/",
+            "MVC\\Views\\": "src/mvc/views/",
+            "Db\\": "src/Db"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nikita V",
+            "email": "vinick96@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.0"
+    }
+}
