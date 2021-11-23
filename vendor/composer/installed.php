@@ -1,22 +1,22 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => NULL,
+        'reference' => '7a21ed17c6347eac6ebfd436384e5edf06a37f00',
         'name' => 'nikita/manychat',
         'dev' => true,
     ),
     'versions' => array(
         'nikita/manychat' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => NULL,
+            'reference' => '7a21ed17c6347eac6ebfd436384e5edf06a37f00',
             'dev_requirement' => false,
         ),
         'symfony/polyfill-ctype' => array(

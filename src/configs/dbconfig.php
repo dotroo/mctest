@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'DBHOST'    => '',
-    'DBNAME'    => '',
-    'DBCHARSET' => '',
-    'DBLOGIN'   => '',
-    'DBPASS'    => ''
+    'DBHOST'    => 'localhost',
+    'DBNAME'    => 'manychat',
+    'DBCHARSET' => 'utf8',
+    'DBLOGIN'   => 'mcphp',
+    'DBPASS'    => 'phppass'
 ];

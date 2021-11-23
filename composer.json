@@ -4,6 +4,7 @@
     "autoload": {
         "psr-4": {
             "Nikita\\Manychat\\": "src/",
+            "MVC\\Collections\\": "src/mvc/collections",
             "MVC\\Controllers\\": "src/mvc/controllers/",
             "MVC\\Core\\": "src/mvc/core/",
             "MVC\\Models\\": "src/mvc/models/",
@@ -18,6 +19,7 @@
         }
     ],
     "require": {
-        "twig/twig": "^3.0"
+        "twig/twig": "^3.0",
+      "ext-pdo": "*"
     }
 }

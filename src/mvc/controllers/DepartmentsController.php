@@ -2,7 +2,6 @@
 
 namespace MVC\Controllers;
 
-use MVC\Collections\DepartmentsCollection;
 use MVC\Core\Controller;
 use MVC\Models\DepartmentModel;
 use MVC\Views\DepartmentsView;
@@ -20,7 +19,6 @@ class DepartmentsController extends Controller
         //test
         $departmentsCollectionTest[] = $this->model->setName('testObject')->setCreatedAt(1)->setUpdatedAt(1)->setId(1);
 
-        $departmentsCollection = new DepartmentsCollection();
         $departmentsCollection = $this->model->selectAll();
         $departmentsList = $departmentsCollection->getElements();
         $layout = $this->view->renderView(['depts' => $departmentsList]);

@@ -14,5 +14,6 @@ return array(
     'MVC\\Models\\' => array($baseDir . '/src/mvc/models'),
     'MVC\\Core\\' => array($baseDir . '/src/mvc/core'),
     'MVC\\Controllers\\' => array($baseDir . '/src/mvc/controllers'),
+    'MVC\\Collections\\' => array($baseDir . '/src/mvc/collections'),
     'Db\\' => array($baseDir . '/src/Db'),
 );

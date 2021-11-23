@@ -31,6 +31,7 @@ class ComposerStaticInitd795b4357cfe3ce590964dfe15157e10
             'MVC\\Models\\' => 11,
             'MVC\\Core\\' => 9,
             'MVC\\Controllers\\' => 16,
+            'MVC\\Collections\\' => 16,
         ),
         'D' => 
         array (
@@ -70,6 +71,10 @@ class ComposerStaticInitd795b4357cfe3ce590964dfe15157e10
         'MVC\\Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/mvc/controllers',
+        ),
+        'MVC\\Collections\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/mvc/collections',
         ),
         'Db\\' => 
         array (

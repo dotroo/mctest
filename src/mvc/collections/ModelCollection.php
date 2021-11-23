@@ -1,6 +1,6 @@
 <?php
 
-namespace MVC\Core;
+namespace MVC\Collections;
 
 class ModelCollection
 {
@@ -24,7 +24,7 @@ class ModelCollection
 
         return self::make(
             array_map(
-                function (array $item) use ($itemClass) {
+                function ($item) use ($itemClass) {
                     /** @var Model $itemObj */
                     $itemObj = new $itemClass();
                     return $itemObj->fromArray($item);
@@ -34,9 +34,10 @@ class ModelCollection
         );
     }
 
-    public function make(array $items): ModelCollection
+    public static function make(array $items): ModelCollection
     {
         $collection = new static();
+
         foreach ($items as $item) {
             $collection->add($item);
         }

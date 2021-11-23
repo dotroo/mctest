@@ -161,6 +161,7 @@ class DepartmentModel extends Model
         $sql = 'SELECT id, name, created_at, updated_at FROM mcdepts';
         $stmt = Db::request($sql);
         $deptsArray = Db::fetch($stmt);
+        die(var_dump($deptsArray));
         $deptsCollection = new DepartmentsCollection();
         return $deptsCollection->fromArray($deptsArray);
     }
