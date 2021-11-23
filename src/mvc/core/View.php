@@ -13,5 +13,8 @@ abstract class View
      * @param array $params
      * @return string
      */
-    public abstract function renderView(array $params): string;
+    public function renderView(array $params = []): string
+    {
+        return $this->view->render($params);
+    }
 }

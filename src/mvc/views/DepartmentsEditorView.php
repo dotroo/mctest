@@ -5,10 +5,10 @@ namespace MVC\Views;
 use MVC\Core\App;
 use MVC\Core\View;
 
-class HomeView extends View
+class DepartmentsEditorView extends View
 {
     public function __construct()
     {
-        $this->view = App::$twig->load('home.twig');
+        $this->view = App::$twig->load('edit-dept.twig');
     }
 }

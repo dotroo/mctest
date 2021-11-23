@@ -11,9 +11,4 @@ class DepartmentsView extends View
     {
         $this->view = App::$twig->load('departments.twig');
     }
-
-    public function renderView(array $params): string
-    {
-        return $this->view->render([$params]);
-    }
 }

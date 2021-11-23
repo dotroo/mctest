@@ -14,5 +14,5 @@ abstract class Controller
      */
     protected $view;
 
-    public abstract function handle();
+    public abstract function handle(array $params = []);
 }

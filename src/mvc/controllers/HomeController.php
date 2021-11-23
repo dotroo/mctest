@@ -12,9 +12,9 @@ class HomeController extends Controller
         $this->view = new HomeView();
     }
 
-    public function handle(): void
+    public function handle(array $params = []): void
     {
-        $layout = $this->view->renderView([]);
+        $layout = $this->view->renderView();
 
         echo $layout;
     }

@@ -14,3 +14,30 @@ div.navbar li a {
     padding: 8px;
     background-color: #dddddd;
 }
+
+div#content table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+div#content td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.link-button {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: serif;
+}
+.link-button:focus {
+    outline: none;
+}
+.link-button:active {
+    color: red;
+}

@@ -1,0 +1,16 @@
+{% extends 'base.twig' %}
+
+{% block title %}Edit Department{% endblock %}
+
+{%  block content %}
+<h2>Edit the department</h2>
+<form method="post" action="/departments/{{ page }}">
+    <input name="name" type="text" placeholder="Department name">
+    <input type="hidden" name="id" value={{ deptId }}>
+    <input type="hidden" name="save" value="yes">
+    <input type="submit" value="Save">
+</form>
+    <form action="/departments">
+        <input type="submit" value="Cancel">
+    </form>
+{% endblock %}

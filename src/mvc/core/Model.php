@@ -4,9 +4,6 @@ namespace MVC\Core;
 
 abstract class Model
 {
-    /**
-     * Получает запись из БД
-     */
     public abstract function selectById(int $id);
 
     public abstract function insert();
@@ -14,4 +11,6 @@ abstract class Model
     public abstract function update();
 
     public abstract function delete();
+
+    public abstract function fromArray(array $array);
 }

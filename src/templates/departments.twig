@@ -3,15 +3,14 @@
 {% block title %}Departments{% endblock %}
 
 {% block content %}
-    <label>Departments</label>
-
-    <br>
+    <h2>Departments</h2>
+    <a href="/departments/add">Add</a>
     <table>
         <tr>
             <th>Name</th>
             <th>Creation Date</th>
             <th>Update Date</th>
-            <th>&nbsp;</th>
+            <th>Actions</th>
         </tr>
         {% for dept in depts %}
         <tr>
@@ -21,9 +20,22 @@
             <td>
                 <div class="dep-control">
                     <ul>
-                        <li><a href="/departments/add?id={{ dept.id }}">Add</a></li>
-                        <li><a href="/departments/edit?id={{ dept.id }}">Edit</a></li>
-                        <li><a href="/departments/remove?id={{ dept.id }}">Remove</a></li>
+                        <li>
+                            <form method="post" action="/departments/edit">
+                                <input type="hidden" name="id" value={{ dept.id }}>
+                                <button type="submit" class="link-button">
+                                    Edit
+                                </button>
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="/departments/remove">
+                                <input type="hidden" name="id" value={{ dept.id }}>
+                                <button type="submit" class="link-button">
+                                    Remove
+                                </button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </td>

@@ -3,6 +3,7 @@
 namespace MVC\Models;
 
 use Db\Db;
+use MVC\Collections\DepartmentsCollection;
 use MVC\Core\Model;
 
 class DepartmentModel extends Model
@@ -32,28 +33,41 @@ class DepartmentModel extends Model
         // TODO: Implement selectByID() method.
     }
 
-    public function insert()
+    public function insert(): bool
     {
-        // TODO: Implement insert() method.
-    }
-
-    public function update()
-    {
-        // TODO: Implement update() method.
-    }
-
-    public function delete()
-    {
-        // TODO: Implement delete() method.
-    }
-
-    public function selectAll(): array
-    {
+        $sql = 'INSERT INTO mcdepts(name, created_at, updated_at) VALUES (:name, :created_at, :updated_at)';
+        $params = [
+            'name' => $this->getName(),
+            'created_at' => time(),
+            'updated_at' => time()
+        ];
         Db::getInstance();
-        $sql = 'SELECT id, name, created_at, updated_at FROM mcdepts';
-        $stmt = Db::request(sql);
-        $deptsCollection = Db::fetch($stmt);
-        return $deptsCollection;
+        $stmt = Db::request($sql, $params);
+
+        return (bool)$stmt;
+    }
+
+    public function update(): bool
+    {
+        $sql = 'UPDATE mcdepts SET name=:name, updated_at=:updated_at WHERE id=:id';
+        $params = [
+            'name' => $this->getName(),
+            'updated_at' => time(),
+            'id' => $this->getId()
+        ];
+        Db::getInstance();
+        $stmt = Db::request($sql, $params);
+
+        return (bool)$stmt;
+    }
+
+    public function delete(): bool
+    {
+        $sql = 'DELETE FROM mcdepts WHERE id=?';
+        Db::getInstance();
+        $stmt = Db::request($sql, [$this->getId()]);
+
+        return (bool)$stmt;
     }
 
     /**
@@ -66,10 +80,13 @@ class DepartmentModel extends Model
 
     /**
      * @param string $name
+     * @return DepartmentModel
      */
-    public function setName(string $name): void
+    public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
     }
 
     /**
@@ -77,15 +94,18 @@ class DepartmentModel extends Model
      */
     public function getCreatedAt(): int
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
      * @param int $createdAt
+     * @return DepartmentModel
      */
-    public function setCreatedAt(int $createdAt): void
+    public function setCreatedAt(int $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -98,9 +118,50 @@ class DepartmentModel extends Model
 
     /**
      * @param int $updatedAt
+     * @return DepartmentModel
      */
-    public function setUpdatedAt(int $updatedAt): void
+    public function setUpdatedAt(int $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return DepartmentModel
+     */
+    public function setId(int $id): DepartmentModel
+    {
+        $this->id = $id;
+        return $this;
+    }
+
+    public function fromArray(array $array): self
+    {
+        $this->setId($array['id'])
+            ->setName($array['name'])
+            ->setCreatedAt($array['created_at'])
+            ->setUpdatedAt($array['updated_at']);
+
+        return $this;
+    }
+
+    public function selectAll(): DepartmentsCollection
+    {
+        Db::getInstance();
+        $sql = 'SELECT id, name, created_at, updated_at FROM mcdepts';
+        $stmt = Db::request($sql);
+        $deptsArray = Db::fetch($stmt);
+        $deptsCollection = new DepartmentsCollection();
+        return $deptsCollection->fromArray($deptsArray);
     }
 }
