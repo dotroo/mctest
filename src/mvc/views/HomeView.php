@@ -9,6 +9,6 @@ class HomeView extends View
 {
     public function __construct()
     {
-        $this->view = App::$twig->load('home.twig');
+        $this->template = App::$twig->load('home.twig');
     }
 }

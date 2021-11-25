@@ -4,8 +4,6 @@ namespace MVC\Core;
 
 abstract class Model
 {
-    public abstract function selectById(int $id);
-
     public abstract function insert();
 
     public abstract function update();

@@ -9,6 +9,6 @@ class DepartmentsEditorView extends View
 {
     public function __construct()
     {
-        $this->view = App::$twig->load('edit-dept.twig');
+        $this->template = App::$twig->load('edit-dept.twig');
     }
 }

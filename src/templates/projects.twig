@@ -1,0 +1,55 @@
+{% extends 'base.twig' %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+    <h2>Departments</h2>
+    <a href="/projects/add">Add</a>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Creation Date</th>
+            <th>Update Date</th>
+            <th>Employees on the project</th>
+            <th>Actions</th>
+        </tr>
+        {% for proj in projects %}
+        <tr>
+            <td>{{ proj.name }}</td>
+            <td>{{ proj.createdAt }}</td>
+            <td>{{ proj.updatedAt }}</td>
+            <td>{{ proj.employees|join(', ') }}</td>
+            <td>
+                <div class="dep-control">
+                    <ul>
+                        <li>
+                            <form method="post" action="/projects/add-empl">
+                                <input type="hidden" name="id" value={{ proj.id }}>
+                                <button type="submit" class="link-button">
+                                    Add an employee
+                                </button>
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="/projects/edit">
+                                <input type="hidden" name="id" value={{ proj.id }}>
+                                <button type="submit" class="link-button">
+                                    Edit
+                                </button>
+                            </form>
+                        </li>
+                        <li>
+                            <form method="post" action="/projects/remove">
+                                <input type="hidden" name="id" value={{ proj.id }}>
+                                <button type="submit" class="link-button">
+                                    Remove
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

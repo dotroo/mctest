@@ -5,10 +5,10 @@ namespace MVC\Views;
 use MVC\Core\App;
 use MVC\Core\View;
 
-class DepartmentsView extends View
+class ProjectsView extends View
 {
     public function __construct()
     {
-        $this->template = App::$twig->load('departments.twig');
+        $this->template = App::$twig->load('projects.twig');
     }
 }

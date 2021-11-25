@@ -28,11 +28,6 @@ class DepartmentModel extends Model
      */
     private $updatedAt;
 
-    public function selectByID(int $id)
-    {
-        // TODO: Implement selectByID() method.
-    }
-
     public function insert(): bool
     {
         $sql = 'INSERT INTO mcdepts(name, created_at, updated_at) VALUES (:name, :created_at, :updated_at)';
@@ -160,8 +155,7 @@ class DepartmentModel extends Model
         Db::getInstance();
         $sql = 'SELECT id, name, created_at, updated_at FROM mcdepts';
         $stmt = Db::request($sql);
-        $deptsArray = Db::fetch($stmt);
-        die(var_dump($deptsArray));
+        $deptsArray = Db::fetchAll($stmt);
         $deptsCollection = new DepartmentsCollection();
         return $deptsCollection->fromArray($deptsArray);
     }

@@ -16,9 +16,6 @@ class DepartmentsController extends Controller
 
     public function handle(array $params = [])
     {
-        //test
-        $departmentsCollectionTest[] = $this->model->setName('testObject')->setCreatedAt(1)->setUpdatedAt(1)->setId(1);
-
         $departmentsCollection = $this->model->selectAll();
         $departmentsList = $departmentsCollection->getElements();
         $layout = $this->view->renderView(['depts' => $departmentsList]);

@@ -47,11 +47,6 @@ class EmployeeModel extends Model
      */
     private $updated_at;
 
-    public function selectById(int $id)
-    {
-        // TODO: Implement selectById() method.
-    }
-
     public function insert()
     {
         // TODO: Implement insert() method.
@@ -65,5 +60,10 @@ class EmployeeModel extends Model
     public function delete()
     {
         // TODO: Implement delete() method.
+    }
+
+    public function fromArray(array $array)
+    {
+        // TODO: Implement fromArray() method.
     }
 }

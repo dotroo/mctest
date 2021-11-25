@@ -7,7 +7,7 @@ abstract class View
     /**
      * @var \Twig\TemplateWrapper
      */
-    protected $view;
+    protected $template;
 
     /**
      * @param array $params
@@ -15,6 +15,6 @@ abstract class View
      */
     public function renderView(array $params = []): string
     {
-        return $this->view->render($params);
+        return $this->template->render($params);
     }
 }

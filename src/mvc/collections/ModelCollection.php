@@ -11,7 +11,7 @@ class ModelCollection
      */
     protected $elements = [];
 
-    public function add(Model $model): self
+    public function add($model): self
     {
         $this->elements[] = $model;
 
