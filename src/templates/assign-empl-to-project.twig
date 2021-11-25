@@ -1,0 +1,18 @@
+{% extends 'base.twig' %}
+
+{% block title %}Assign Employee{% endblock %}
+
+{% block content %}
+<h2>Assign an Employee to the Project</h2>
+<form action="/projects/assign" method="post" id="form">
+    <label for="employees">Select employees</label>
+    <select id="employees" form="form">
+        {% for empl in employees %}
+            <option value="{{ empl.id }}">{{ empl.fullName }}</option>
+        {% endfor %}
+    </select>
+    <input type="hidden" name="id" value={{ projectId }}>
+    <input type="hidden" name="save" value="yes">
+    <input type="submit">Assign
+</form>
+{% endblock %}
