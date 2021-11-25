@@ -12,7 +12,10 @@
         {% endfor %}
     </select>
     <input type="hidden" name="id" value={{ projectId }}>
-    <input type="hidden" name="save" value="yes">
-    <input type="submit">Assign
+    <input type="hidden" name="save" value="yes"><br>
+    <input type="submit" value="Assign">
 </form>
+    <form action="/projects">
+        <input type="submit" value="Cancel">
+    </form>
 {% endblock %}
