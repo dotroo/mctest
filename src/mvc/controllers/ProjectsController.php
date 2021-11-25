@@ -17,8 +17,6 @@ class ProjectsController extends Controller
 
     public function handle(array $params = [])
     {
-        //$projectsTest[] = $this->model->setId(1)->setName('testProject')->setCreatedAt(time())->setUpdatedAt(time())->setEmployees(['emp1', 'emp2']);
-
         $projectsCollection = $this->model->selectAll();
         $projectsList = $projectsCollection->getElements();
         $layout = $this->view->renderView(['projects' => $projectsList]);
