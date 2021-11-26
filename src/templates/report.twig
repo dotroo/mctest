@@ -1,0 +1,21 @@
+{% extends 'base.twig' %}
+
+{% block title %}report{% endblock %}
+
+{% block content %}
+<h2>Projects report</h2>
+<table>
+    <tr>
+        <th>Project ID</th>
+        <th>Project Name</th>
+        <th>Budget</th>
+    </tr>
+    {% for project in report %}
+    <tr>
+        <td>{{ project.projectModel.id }}</td>
+        <td>{{ project.projectModel.name }}</td>
+        <td>{{ project.budget }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

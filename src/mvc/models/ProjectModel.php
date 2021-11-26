@@ -170,7 +170,7 @@ class ProjectModel extends Model
         return (bool)$stmt;
     }
 
-    public function getProjectEmployees(): array
+    public function selectProjectEmployeesNames(): array
     {
         $sql = 'SELECT mcemployees.first_name, mcemployees.last_name FROM employees_projects JOIN mcemployees ON mcemployees.id=employees_projects.employee_id AND employees_projects.project_id=?';
         Db::getInstance();
@@ -186,6 +186,23 @@ class ProjectModel extends Model
         return $employeesFullNamesArray;
     }
 
+    /**
+     * @return EmployeeModel[]
+     */
+    public function selectEmployeesOnProject(): array
+    {
+        $sql = 'SELECT mcemployees.id, first_name, last_name, sex, birthday, salary, department_id, created_at, updated_at FROM mcemployees JOIN employees_projects ep on mcemployees.id = ep.employee_id AND ep.project_id=?';
+        Db::getInstance();
+        $stmt = Db::request($sql, [$this->getId()]);
+        $employeeArray = Db::fetchAll($stmt);
+        $employeeCollection = (new EmployeesCollection())->fromArray($employeeArray);
+        $employeeList = $employeeCollection->getElements();
+        return $employeeList;
+    }
+
+    /**
+     * @return EmployeeModel[]
+     */
     public function selectEmployeesNotOnProject(): array
     {
         $sql = 'SELECT id, first_name, last_name, sex, birthday, salary, department_id, created_at, updated_at FROM mcemployees WHERE mcemployees.id NOT IN (SELECT employee_id from employees_projects WHERE project_id=?)';
@@ -206,7 +223,7 @@ class ProjectModel extends Model
         $projectsCollection = (new ProjectsCollection())->fromArray($projectsArray);
         /** @var ProjectModel $project */
         foreach ($projectsCollection->getElements() as $project) {
-            $project->setEmployees($project->getProjectEmployees());
+            $project->setEmployees($project->selectProjectEmployeesNames());
         }
 
         return $projectsCollection;

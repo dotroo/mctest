@@ -5,7 +5,6 @@ namespace MVC\Controllers;
 use MVC\Core\Controller;
 use MVC\Models\ProjectModel;
 use MVC\Models\ProjectsEmployeesModel;
-use MVC\Views\ProjectsAssignEmployeeView;
 use MVC\Views\ProjectsView;
 
 class ProjectsController extends Controller

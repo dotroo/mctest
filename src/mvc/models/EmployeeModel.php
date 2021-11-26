@@ -286,7 +286,7 @@ class EmployeeModel extends Model
 
     public function update(): bool
     {
-        $sql = 'UPDATE mcemployees SET first_name=:first_name, last_name=:last_name, sex=:sex, birthday=:birthday, salary=:salary, department_id=:department_id, updated_at=:updated_at';
+        $sql = 'UPDATE mcemployees SET first_name=:first_name, last_name=:last_name, sex=:sex, birthday=:birthday, salary=:salary, department_id=:department_id, updated_at=:updated_at WHERE id=:id';
         $params = [
             'first_name' => $this->getFirstName(),
             'last_name' => $this->getLastName(),
@@ -294,7 +294,8 @@ class EmployeeModel extends Model
             'birthday' => $this->getBirthday(),
             'salary' => $this->getSalary(),
             'department_id' => $this->getDepartmentId(),
-            'updated_at' => time()
+            'updated_at' => time(),
+            'id' => $this->getId()
         ];
         Db::getInstance();
         $stmt = Db::request($sql, $params);
