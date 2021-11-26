@@ -3,6 +3,7 @@
 namespace MVC\Models;
 
 use Db\Db;
+use MVC\Collections\EmployeesCollection;
 use MVC\Collections\ProjectsCollection;
 use MVC\Core\Model;
 use MVC\Views\ProjectsEditorView;
@@ -175,7 +176,7 @@ class ProjectModel extends Model
         Db::getInstance();
         $stmt = Db::request($sql, [$this->getId()]);
         $employeeArray = Db::fetchAll($stmt);
-        /* так как имя и фамилия хранятся в базе отдельно, они возвращаются как два разных элемента массива. Объединим их*/
+        /* так как имя и фамилия хранятся в базе отдельно, они возвращаются как два разных элемента массива. Объединим их */
         $employeesFullNamesArray = [];
         foreach ($employeeArray as $firstLastName) {
             $fullName = implode(' ', $firstLastName);
@@ -185,6 +186,17 @@ class ProjectModel extends Model
         return $employeesFullNamesArray;
     }
 
+    public function selectEmployeesNotOnProject(): array
+    {
+        $sql = 'SELECT id, first_name, last_name, sex, birthday, salary, department_id, created_at, updated_at FROM mcemployees WHERE mcemployees.id NOT IN (SELECT employee_id from employees_projects WHERE project_id=?)';
+        Db::getInstance();
+        $stmt = Db::request($sql, [$this->getId()]);
+        $employeeArray = Db::fetchAll($stmt);
+        $employeeCollection = (new EmployeesCollection())->fromArray($employeeArray);
+        $employeeList = $employeeCollection->getElements();
+        return $employeeList;
+    }
+
     public function selectAll(): ProjectsCollection
     {
         $sql = 'SELECT id, name, created_at, updated_at FROM mcprojects';
@@ -192,9 +204,9 @@ class ProjectModel extends Model
         $stmt = Db::request($sql);
         $projectsArray = DB::fetchAll($stmt);
         $projectsCollection = (new ProjectsCollection())->fromArray($projectsArray);
-        /** @var ProjectModel $element */
-        foreach ($projectsCollection->getElements() as $element) {
-            $element->setEmployees($element->getProjectEmployees());
+        /** @var ProjectModel $project */
+        foreach ($projectsCollection->getElements() as $project) {
+            $project->setEmployees($project->getProjectEmployees());
         }
 
         return $projectsCollection;

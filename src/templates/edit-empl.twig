@@ -1,0 +1,39 @@
+{% extends 'base.twig' %}
+
+{% block title %}Edit Employee{% endblock %}
+
+{%  block content %}
+<h2>Edit the employee</h2>
+<form method="post" action="/employees/{{ page }}" id="edit-empl">
+    <p><input name="firstName" type="text" placeholder="Employee first name" value="{{ empl.first_name }}"></p>
+    <p><input name="lastName" type="text" placeholder="Employee last name" value="{{ empl.last_name }}"></p>
+    <p>
+        <label for="sex">Sex</label>
+        <select name="sex" id="sex" form="edit-empl">
+            {% if empl.sex == 'F' %}
+                <option value="M">Male</option>
+                <option value="F" selected>Female</option>
+            {% else %}
+                <option value="M" selected>Male</option>
+                <option value="F">Female</option>
+            {% endif %}
+        </select>
+    </p>
+    <p><input name="birthday" type="text" placeholder="Birth Date" value="{{ empl.birthday }}"></p>
+    <p><input name="salary" type="text" placeholder="Salary" value="{{ empl.salary }}"></p>
+    <p>
+        <label for="dept">Department</label>
+        <select name="dept" id="dept" form="edit-empl">
+            {% for dept in depts %}
+                <option value="{{ dept.id }}">{{ dept.name }}</option>
+            {% endfor %}
+        </select>
+    </p>
+    <input type="hidden" name="id" value={{ emplId }}>
+    <input type="hidden" name="save" value="yes">
+    <p><input type="submit" value="Save"></p>
+</form>
+<form action="/employees">
+    <input type="submit" value="Cancel">
+</form>
+{% endblock %}

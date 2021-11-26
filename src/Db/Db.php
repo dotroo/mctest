@@ -53,6 +53,13 @@ class Db
         return $stmt;
     }
 
+    public static function fetch(\PDOStatement $statement): array
+    {
+        $data = $statement->fetch();
+
+        return is_array($data) ? $data : [];
+    }
+
     public static function fetchAll(\PDOStatement $statement): array
     {
         $data = $statement->fetchAll();

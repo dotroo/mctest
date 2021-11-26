@@ -28,47 +28,10 @@ class DepartmentModel extends Model
      */
     private $updatedAt;
 
-    public function insert(): bool
-    {
-        $sql = 'INSERT INTO mcdepts(name, created_at, updated_at) VALUES (:name, :created_at, :updated_at)';
-        $params = [
-            'name' => $this->getName(),
-            'created_at' => time(),
-            'updated_at' => time()
-        ];
-        Db::getInstance();
-        $stmt = Db::request($sql, $params);
-
-        return (bool)$stmt;
-    }
-
-    public function update(): bool
-    {
-        $sql = 'UPDATE mcdepts SET name=:name, updated_at=:updated_at WHERE id=:id';
-        $params = [
-            'name' => $this->getName(),
-            'updated_at' => time(),
-            'id' => $this->getId()
-        ];
-        Db::getInstance();
-        $stmt = Db::request($sql, $params);
-
-        return (bool)$stmt;
-    }
-
-    public function delete(): bool
-    {
-        $sql = 'DELETE FROM mcdepts WHERE id=?';
-        Db::getInstance();
-        $stmt = Db::request($sql, [$this->getId()]);
-
-        return (bool)$stmt;
-    }
-
     /**
-     * @return string
+     * @return string|null
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -140,6 +103,43 @@ class DepartmentModel extends Model
         return $this;
     }
 
+    public function insert(): bool
+    {
+        $sql = 'INSERT INTO mcdepts(name, created_at, updated_at) VALUES (:name, :created_at, :updated_at)';
+        $params = [
+            'name' => $this->getName(),
+            'created_at' => time(),
+            'updated_at' => time()
+        ];
+        Db::getInstance();
+        $stmt = Db::request($sql, $params);
+
+        return (bool)$stmt;
+    }
+
+    public function update(): bool
+    {
+        $sql = 'UPDATE mcdepts SET name=:name, updated_at=:updated_at WHERE id=:id';
+        $params = [
+            'name' => $this->getName(),
+            'updated_at' => time(),
+            'id' => $this->getId()
+        ];
+        Db::getInstance();
+        $stmt = Db::request($sql, $params);
+
+        return (bool)$stmt;
+    }
+
+    public function delete(): bool
+    {
+        $sql = 'DELETE FROM mcdepts WHERE id=?';
+        Db::getInstance();
+        $stmt = Db::request($sql, [$this->getId()]);
+
+        return (bool)$stmt;
+    }
+
     public function fromArray(array $array): self
     {
         $this->setId($array['id'])
@@ -156,7 +156,20 @@ class DepartmentModel extends Model
         $sql = 'SELECT id, name, created_at, updated_at FROM mcdepts';
         $stmt = Db::request($sql);
         $deptsArray = Db::fetchAll($stmt);
-        $deptsCollection = new DepartmentsCollection();
-        return $deptsCollection->fromArray($deptsArray);
+        $deptsCollection = (new DepartmentsCollection())->fromArray($deptsArray);
+        return $deptsCollection;
     }
+
+    public function selectById(?int $id): array
+    {
+        if ($id !== null) {
+            Db::getInstance();
+            $sql = 'SELECT id, name, created_at, updated_at FROM mcdepts WHERE id=?';
+            $stmt = Db::request($sql, [$id]);
+            return Db::fetch($stmt);
+        } else {
+            return [];
+        }
+    }
+
 }

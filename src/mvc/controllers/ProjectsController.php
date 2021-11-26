@@ -4,6 +4,7 @@ namespace MVC\Controllers;
 
 use MVC\Core\Controller;
 use MVC\Models\ProjectModel;
+use MVC\Models\ProjectsEmployeesModel;
 use MVC\Views\ProjectsAssignEmployeeView;
 use MVC\Views\ProjectsView;
 
@@ -78,11 +79,20 @@ class ProjectsController extends Controller
     {
         $this->model->setId($_POST['id']);
         if (isset($_POST['save']) and $_POST['save'] = 'yes') {
-            $this->model->addEmployee('');
+            $projectsEmployeesModel = (new ProjectsEmployeesModel())->setEmployeeId((int)$_POST['employee'])->setProjectId((int)$_POST['id']);
+            $success = $projectsEmployeesModel->insert();
+
+            if ($success) {
+                header('Location: /projects', true, 302);
+            } else {
+                echo 'Something went wrong';
+            }
         } else {
             $assign = new ProjectsAssignEmployeeController();
+            $availableEmployees = $this->model->selectEmployeesNotOnProject();
             $assign->handle([
-                'projectId' => $this->model->getId()
+                'projectId' => $this->model->getId(),
+                'employees' => $availableEmployees
             ]);
         }
 

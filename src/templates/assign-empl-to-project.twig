@@ -4,11 +4,11 @@
 
 {% block content %}
 <h2>Assign an Employee to the Project</h2>
-<form action="/projects/assign" method="post" id="form">
+<form action="/projects/assign" method="post">
     <label for="employees">Select employees</label>
-    <select id="employees" form="form">
+    <select name="employee" id="employees">
         {% for empl in employees %}
-            <option value="{{ empl.id }}">{{ empl.fullName }}</option>
+            <option value="{{ empl.id }}">{{ empl.firstName }} {{ empl.lastName }}</option>
         {% endfor %}
     </select>
     <input type="hidden" name="id" value={{ projectId }}>
