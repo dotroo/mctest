@@ -26,6 +26,7 @@ services:
     volumes:
       - ./docker/nginx/manychat/:/etc/nginx/conf.d
       - ./docker/nginx/templates/:/etc/nginx/templates/
+      - ./public:/var/www/manychat/public
     networks:
       - manychat-network
     ports:
