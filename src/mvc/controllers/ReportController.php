@@ -39,9 +39,11 @@ class ReportController extends Controller
             }
             $report->setBudget($reportBudget);
         }
+
         usort($reports, function (ReportModel $a, ReportModel $b)
                 { return $a->getBudget() < $b->getBudget(); }
         );
+
         $layout = $this->view->renderView(['report' => $reports]);
 
         echo $layout;
