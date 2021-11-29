@@ -6,31 +6,36 @@ services:
     image: manychat-backend:latest
     restart: always
     tty: true
-    working_dir: /var/www/manychat
+    working_dir: /var/www/manychat/src
     #env_file:
     # - .env
     volumes:
-      - .:/var/www/manychat
+      - .:/var/www/manychat/
     networks:
       - manychat-network
     container_name: manychat-backend
 
   # Nginx Service
   manychat-nginx:
-    image: nginx:alpine
+    image: nginx
     container_name: manychat-nginx
     restart: always
     tty: true
     environment:
-      - "APPLICATION_UPSTREAM=manychat-backend:9000"
+      - APPLICATION_UPSTREAM=manychat-backend:9000
     volumes:
-      - ./docker/nginx/sites-available/manychat/:/etc/nginx/sites-available/manychat/
+      - ./docker/nginx/manychat/:/etc/nginx/conf.d
       - ./docker/nginx/templates/:/etc/nginx/templates/
+      - ./docker/nginx/logs/access.log:/var/log/nginx/access.log
+      - ./docker/nginx/logs/error.log:/var/log/nginx/error.log
+      - .:/var/www/manychat/
     networks:
       - manychat-network
     ports:
       - "80:80"
       - "443:443"
+    links:
+      - manychat-backend
 
   # MySQL Service
   manychat-mysql:
@@ -41,9 +46,9 @@ services:
     ports:
       - "3309:3306"
     environment:
-      MYSQL_DATABASE: app_db
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: 111111
+      MYSQL_DATABASE: manychat
+      MYSQL_USER: mcphp
+      MYSQL_PASSWORD: phppass
       MYSQL_ROOT_PASSWORD: admin
       SERVICE_NAME: mysql
     networks:
