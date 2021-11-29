@@ -2,10 +2,6 @@
 
 namespace MVC\Core;
 
-use MVC\Core\App;
-use MVC\Controllers\ShortenController;
-use MVC\Controllers\ResolveController;
-
 class Kernel
 {
     private $defaultControllerName = 'HomeController';
