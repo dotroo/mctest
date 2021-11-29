@@ -15,8 +15,8 @@
         {% for dept in depts %}
         <tr>
             <td>{{ dept.name }}</td>
-            <td>{{ dept.createdAt }}</td>
-            <td>{{ dept.updatedAt }}</td>
+            <td>{{ dept.createdAt|date() }}</td>
+            <td>{{ dept.updatedAt|date() }}</td>
             <td>
                 <div class="dep-control">
                     <ul>

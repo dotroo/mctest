@@ -27,8 +27,8 @@
             <td>{{ empl.salary }}</td>
             <td>{{ empl.departmentModel.name }}</td>
             <td>{{ empl.projects|join(', ') }}</td>
-            <td>{{ empl.createdAt }}</td>
-            <td>{{ empl.updatedAt }}</td>
+            <td>{{ empl.createdAt|date() }}</td>
+            <td>{{ empl.updatedAt|date() }}</td>
             <td>
                 <div class="dep-control">
                     <ul>

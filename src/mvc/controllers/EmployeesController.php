@@ -98,7 +98,7 @@ class EmployeesController extends Controller
     public function assign()
     {
         $this->model->setId($_POST['id']);
-        if (isset($_POST['save']) and $_POST['save'] = 'yes') {
+        if (isset($_POST['save']) && $_POST['save'] === 'yes') {
             $projectsEmployeesModel = (new ProjectsEmployeesModel())->setProjectId((int)$_POST['project'])->setEmployeeId((int)$_POST['id']);
             $success = $projectsEmployeesModel->insert();
 

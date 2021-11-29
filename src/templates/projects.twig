@@ -16,8 +16,8 @@
         {% for proj in projects %}
         <tr>
             <td>{{ proj.name }}</td>
-            <td>{{ proj.createdAt }}</td>
-            <td>{{ proj.updatedAt }}</td>
+            <td>{{ proj.createdAt|date() }}</td>
+            <td>{{ proj.updatedAt|date() }}</td>
             <td>{{ proj.employees|join(', ') }}</td>
             <td>
                 <div class="dep-control">
