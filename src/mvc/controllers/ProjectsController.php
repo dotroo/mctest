@@ -44,7 +44,7 @@ class ProjectsController extends Controller
     public function edit()
     {
         $this->model->setId($_POST['id']);
-        if (isset($_POST['save']) and $_POST['save'] = 'yes') {
+        if (isset($_POST['save']) && $_POST['save'] === 'yes') {
             $this->model->setName(htmlspecialchars($_POST['name']));
             $success = $this->model->update();
 

@@ -27,7 +27,7 @@ class EmployeesController extends Controller
 
     public function add()
     {
-        if (isset($_POST['save']) and $_POST['save'] = 'yes') {
+        if (isset($_POST['save']) && $_POST['save'] === 'yes') {
             $this->model->setFirstName(htmlspecialchars($_POST['firstName']))
                     ->setLastName(htmlspecialchars($_POST['lastName']))
                     ->setSex($_POST['sex'])
@@ -55,7 +55,7 @@ class EmployeesController extends Controller
     public function edit()
     {
         $this->model->setId($_POST['id']);
-        if (isset($_POST['save']) and $_POST['save'] = 'yes') {
+        if (isset($_POST['save']) && $_POST['save'] === 'yes') {
             $this->model->setFirstName(htmlspecialchars($_POST['firstName']))
                 ->setLastName(htmlspecialchars($_POST['lastName']))
                 ->setSex($_POST['sex'])
